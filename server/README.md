@@ -13,12 +13,12 @@ Crypto Forecast Backend is a Flask-based API service designed to provide cryptoc
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/dtoyoda7/Crypto_Forecast_BE.git
+git clone https://github.com/dtoyoda10/crypto-forcast.git
 ```
 
 2. Install dependencies:
 ```bash
-cd Crypto_Forecast_BE
+cd crypto-forcast/server
 pip install -r requirements.txt
 ```
 
