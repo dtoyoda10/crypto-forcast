@@ -15,13 +15,13 @@ Crypto Predictor Frontend is a React-based web application designed to provide c
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/dtoyoda7/Crypto_Forcast_FE.git
+git clone https://github.com/dtoyoda10/crypto-forcast.git
 ```
 
 2. Install dependencies:
 
 ```bash
-cd Crypto_Forcast_FE
+cd crypto-forcast
 npm install
 ```
 
