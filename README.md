@@ -27,7 +27,7 @@ The Cryptocurrency Forecast Project utilizes historical cryptocurrency price dat
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/dtoyoda7/Crypto_Forcast.git
+    git clone https://github.com/dtoyoda10/crypto-forcast.git
     cd Crypto_Forcast
     ```
 
