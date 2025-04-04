@@ -21,7 +21,7 @@ git clone https://github.com/dtoyoda10/crypto-forcast.git
 2. Install dependencies:
 
 ```bash
-cd crypto-forcast
+cd crypto-forcast/client
 npm install
 ```
 
