@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: crypto-forecast-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: crypto_forcast
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - crypto-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/crypto_forcast --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: crypto-forecast-backend
+    restart: unless-stopped
+    environment:
+      FLASK_ENV: production
+      MONGODB_URI: mongodb://mongodb:27017
+      MONGODB_DB_NAME: crypto_forcast
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SECRET_KEY: ${SECRET_KEY}
+      CORS_ORIGINS: http://localhost:3000,http://localhost:80
+      PORT: 5000
+      LOG_LEVEL: INFO
+    ports:
+      - "5000:5000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - crypto-network
+    volumes:
+      - ./server/logs:/app/logs
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: crypto-forecast-frontend
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:5000
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - crypto-network
+
+networks:
+  crypto-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
